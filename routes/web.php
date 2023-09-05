@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function(){
-    return view('welcome');
-});
+    return view('login');
+})->name('auth-login-basic');
+
+Route::get('/admin/', [AdminController::class, 'index'])->name('dashboard-analytics');
+Route::get('/admin/{id}', [AdminController::class, 'show'])->name('dashboard-analytics');
 
 
 $controller_path = 'App\Http\Controllers';
 
 // Main Page Route
-Route::get('/tester', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
+Route::get('/tester', $controller_path . '\dashboard\Analytics@index');
 
 // layout
 Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
@@ -37,7 +41,7 @@ Route::get('/pages/misc-error', $controller_path . '\pages\MiscError@index')->na
 Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnderMaintenance@index')->name('pages-misc-under-maintenance');
 
 // authentication
-Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic');
+Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index');
 Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic');
 Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic');
 
