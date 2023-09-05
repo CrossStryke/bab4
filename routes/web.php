@@ -12,13 +12,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get();
+Route::get('/', function(){
+    return view('welcome');
+});
 
 
 $controller_path = 'App\Http\Controllers';
 
 // Main Page Route
-Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
+Route::get('/tester', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
 
 // layout
 Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
