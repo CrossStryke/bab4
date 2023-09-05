@@ -1,3 +1,131 @@
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+.calendar {
+  max-width: 500px; /* Adjust the width as per your preference */
+  margin: 20px auto;
+  background-color: #fff;
+}
+
+.month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: #8766EE;
+  color: #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  background-color: #f7f7f7;
+
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: -1px;
+  background-color: #fff;
+}
+
+.days div {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.days div:hover {
+  background-color: #f2f2f2;
+}
+
+.today {
+  background-color: #8766EE;
+  color: #fff;
+  border-radius: 50%;
+}
+/* Styles for the clock */
+/* Styles for the clock */
+.clock {
+  width: 250px;
+  height: 100px;
+  /* border: 5px solid #8766EE; */
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#time {
+  text-align: center;
+  line-height: 1.5;
+}
+
+  /* Styles for the statistics */
+  .statistics {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: #f7f7f7;
+    margin-bottom: 10px;
+  }
+
+  .statistics-item {
+    text-align: center;
+  }
+
+  .statistics-item-value {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .statistics-item-label {
+    font-size: 12px;
+    color: #999;
+  }
+  /* Gaya untuk elemen loading */
+  #loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+
+    /* Gaya untuk tabel yang disembunyikan sebelum data dimuat */
+    #studentTable {
+      display: none;
+    }
+    #main-content {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+
+  .show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
+
 @extends('layouts/contentNavbarLayout')
 
 @section('title', 'Main Page')
@@ -58,10 +186,6 @@
               <div>Sun</div>
             </div>
             <div class="days" id="days"></div>
-            <div class="clock" style="">
-              <div class="time" id="time">00:00</div>
-              <div class="ampm" id="ampm">AM</div>
-            </div>
           </div>
           </div>
         </div>
@@ -72,46 +196,10 @@
   <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
     <div class="card">
       <div class="row row-bordered g-0">
-        <div class="col-md-8">
-          <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-          <div id="totalRevenueChart" class="px-2"></div>
-        </div>
         <div class="col-md-4">
           <div class="card-body">
             <div class="text-center">
-              <div class="dropdown">
-                <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="growthReportId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  2022
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                  <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                  <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                  <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="growthChart"></div>
-          <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
-
-          <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-            <div class="d-flex">
-              <div class="me-2">
-                <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-              </div>
-              <div class="d-flex flex-column">
-                <small>2022</small>
-                <h6 class="mb-0">$32.5k</h6>
-              </div>
-            </div>
-            <div class="d-flex">
-              <div class="me-2">
-                <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-              </div>
-              <div class="d-flex flex-column">
-                <small>2021</small>
-                <h6 class="mb-0">$41.2k</h6>
-              </div>
+            <p>ddd</p>
             </div>
           </div>
         </div>
@@ -427,4 +515,140 @@
   </div>
   <!--/ Transactions -->
 </div>
+<script>
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June", "July",
+      "August", "September", "October", "November", "December"
+    ];
+    
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    
+    const monthYearDisplay = document.getElementById("date");
+    const daysContainer = document.getElementById("days");
+    
+    function renderCalendar() {
+      const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+      const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
+      const daysInMonth = lastDayOfMonth.getDate();
+    
+      let firstDayOfWeek = firstDayOfMonth.getDay();
+      if (firstDayOfWeek === 0) firstDayOfWeek = 7;
+    
+      monthYearDisplay.innerText = monthNames[currentMonth] + " " + currentYear;
+    
+      daysContainer.innerHTML = "";
+    
+      for (let i = 1; i < firstDayOfWeek; i++) {
+        const emptyCell = document.createElement("div");
+        daysContainer.appendChild(emptyCell);
+      }
+    
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement("div");
+        dayCell.innerText = day;
+        dayCell.addEventListener("click", () => alert(`Clicked on ${day} ${monthNames[currentMonth]} ${currentYear}`));
+        if (today.getDate() === day && today.getMonth() === currentMonth && today.getFullYear() === currentYear) {
+          dayCell.classList.add("today");
+        }
+        daysContainer.appendChild(dayCell);
+      }
+    }
+    
+    function prevMonth() {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    }
+    
+    function nextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    }
+    
+    renderCalendar();
+    
+    function updateClock() {
+  const now = new Date();
+  let hours = now.getHours();
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  const timeDisplay = document.getElementById('time');
+  const ampmDisplay = document.getElementById('ampm');
+
+  let ampm = 'AM';
+  if (hours >= 12) {
+    ampm = 'PM';
+    if (hours > 12) {
+      hours -= 12;
+    }
+  }
+
+  hours = String(hours).padStart(2, '0');
+
+  timeDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+  ampmDisplay.textContent = ampm;
+}
+
+setInterval(updateClock, 1000);
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Ambil referensi ke elemen-elemen yang diperlukan
+      var loadingElement = document.getElementById('loading');
+      var tableElement = document.getElementById('studentTable');
+      var tbodyElement = tableElement.querySelector('tbody');
+
+      // Fungsi untuk mengisi tabel dengan data siswa
+      function fillTableWithData(data) {
+        var html = '';
+        data.forEach(function(student, index) {
+          html += '<tr>';
+          html += '<td>' + (index + 1) + '</td>';
+          html += '<td>' + student.name + '</td>';
+          html += '<td>' + student.ic + '</td>';
+          html += '<td>' + student.dorm + '</td>';
+          html += '<td>' + student.date + '</td>';
+          html += '<td>' + student.status + '</td>';
+          html += '<td>';
+          html += '</div>';
+          html += '</div>';
+          html += '</td>';
+          html += '</tr>';
+        });
+
+        // Tampilkan data siswa di dalam tabel
+        tbodyElement.innerHTML = html;
+
+        // Sembunyikan elemen loading
+        loadingElement.style.display = 'none';
+        // Tampilkan tabel setelah data tersedia
+        tableElement.style.display = 'table';
+      }
+
+      // Simulasikan proses loading selama beberapa detik (contoh: 3 detik)
+      setTimeout(function() {
+        var dummyData = [
+          { name: 'ABDUL HAKIM BIN HAMIZI', ic: '031007040403', dorm: '2C2', date:'26-07-2023', status: '<span class="badge bg-label-warning me-1">Pending</span>' },
+          { name: 'ABDUL HAKIM BIN HAMIZI', ic: '031007040403', dorm: '2C2', date:'12-03-2022', status: '<span class="badge bg-label-success me-1">Completed</span>' },
+          // Tambahkan data siswa lainnya di sini
+        ];
+        fillTableWithData(dummyData);
+      }, 3000); // Ganti nilai 3000 dengan waktu loading sesuai kebutuhan (dalam milidetik)
+    });
+
+
+    </script>
 @endsection
