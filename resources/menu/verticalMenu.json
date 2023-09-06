@@ -6,6 +6,14 @@
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "dashboard-analytics"
     },
+
+    {
+      "url": "/admin",
+      "name": "Rast",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard"
+    },
+
     {
       "name": "Layouts",
       "icon": "menu-icon tf-icons bx bx-layout",
@@ -40,7 +48,7 @@
       ]
     },
     {
-      "menuHeader": "Pages"
+      "menuHeader": "Asset Records"
     },
     {
       "name": "Account Settings",

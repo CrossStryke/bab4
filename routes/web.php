@@ -13,14 +13,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Main route for the deployment
 Route::get('/', function(){
     return view('login');
 })->name('auth-login-basic');
 
-Route::get('/admin/', [AdminController::class, 'index'])->name('dashboard-analytics');
+Route::get('/forgetPassword', function(){
+    return view('forgetPassword');
+})->name('auth-reset-password-basic');
+
+Route::get('/register', function(){
+    return view('register');
+})->name('auth-register-basic');
+
+
+// Admin controller
+Route::get('/admin/', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/admin/{id}', [AdminController::class, 'show'])->name('dashboard-analytics');
 
 
+
+// Routes for the template style
 $controller_path = 'App\Http\Controllers';
 
 // Main Page Route
