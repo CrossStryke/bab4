@@ -68,17 +68,27 @@
   </div>
   <!-- Total Revenue -->
   <div class="col-12 order-2 order-md-3 order-lg-2 mb-4">
-  <h4>Asset records</h4>
-    <div class="card">
-      <div class="row row-bordered g-0">
-        <div class="col-md-4">
-          <div class="card-body">
-            <p>ohfofhao</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="card">
+  <h5 class="card-header">Asset Records</h5><!-- Get 5 latest action -->
+  <div class="table-responsive text-nowrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Bil</th>
+          <th>Serial Number</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody class="table-border-bottom-0">
+        <tr>
+          <td>ss</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
   </div>
   <!--/ Total Revenue -->
 </div>

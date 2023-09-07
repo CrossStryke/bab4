@@ -177,7 +177,12 @@ return [
     App\Providers\EventServiceProvider::class,
     App\Providers\RouteServiceProvider::class,
     App\Providers\MenuServiceProvider::class,
+    Barryvdh\DomPDF\ServiceProvider::class,
 
+  ],
+
+  'aliases' => [
+    'PDF' => Barryvdh\DomPDF\Facade::class,
   ],
 
   /*
