@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('serialID');
             $table->string('name');
-            $table->double('price');
+            $table->double('price', 8, 2);
             $table->string('received');
             $table->string('status');
         });

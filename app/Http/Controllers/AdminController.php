@@ -8,8 +8,8 @@ use App\Models\Admin;
 class AdminController extends Controller
 {
     public function index(){
-
-        return view('admin.welcome');
+        $assets = Admin::all();
+        return view('admin.welcome', ['main' => $assets]);
     }
 
     public function insert(){
@@ -17,7 +17,8 @@ class AdminController extends Controller
     }
 
     public function details(){
-        return view('admin.records');
+        $assets = Admin::all();
+        return view('admin.records', ['main' => $assets]);
     }
 
     public function profile(){
@@ -43,6 +44,7 @@ class AdminController extends Controller
 
 
     public function show($id){
-        return view('/admin/show');
+        $asset = Admin::findOrFail($id);
+        return view('admin.show', ['asset'=>$asset]);
     }
 }

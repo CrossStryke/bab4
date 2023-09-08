@@ -82,9 +82,17 @@
         </tr>
       </thead>
       <tbody class="table-border-bottom-0">
+        @foreach($main as $asset)
+        @if($loop -> iteration < 6)
         <tr>
-          <td>ss</td>
+          <td>{{ $loop -> iteration}}</td>
+          <td>{{ $asset['serialID'] }}</td>
+          <td>{{ $asset['name'] }}</td>
+          <td>{{ $asset['price'] }}</td>
+          <td>{{ $asset['status'] }}</td>
         </tr>
+        @endif
+        @endforeach
       </tbody>
     </table>
   </div>
