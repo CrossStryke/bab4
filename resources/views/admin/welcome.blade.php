@@ -89,7 +89,13 @@
           <td>{{ $asset['serialID'] }}</td>
           <td>{{ $asset['name'] }}</td>
           <td>{{ $asset['price'] }}</td>
-          <td>{{ $asset['status'] }}</td>
+          <td><span class="
+          @if($asset['status'] == 'Active')
+          badge rounded-pill bg-label-success me-1
+          @else
+          badge rounded-pill bg-label-danger me-1
+          @endif
+          ">{{ $asset['status'] }}</td>
         </tr>
         @endif
         @endforeach

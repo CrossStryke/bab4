@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -47,4 +48,24 @@ class AdminController extends Controller
         $asset = Admin::findOrFail($id);
         return view('admin.show', ['asset'=>$asset]);
     }
+
+    public function viewPDF(){
+        $month = request('month');
+
+        $pdf = Admin::whereMonth('updated_at', $month)->get();
+
+        return view('admin.view_pdf', ['results'=> $pdf]);
+    }
+
+    public function createPDF(){
+        // $data = $this;
+        // view()->share('main', $data);
+        // $pdf = PDF::loadView('admin/pdf-record', compact('data'))->output();
+    
+        // // Create a Laravel response object with the PDF content and headers
+        // return response($pdf)
+        //     ->header('Content-Type', 'application/pdf')
+        //     ->header('Content-Disposition', 'inline; filename="record.pdf"');
+    }
+    
 }

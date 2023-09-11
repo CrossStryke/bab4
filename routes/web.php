@@ -32,6 +32,7 @@ Route::get('/admin/', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/admin/records/', [AdminController::class, 'details'])->name('records');
 Route::get('/admin/form/', [AdminController::class, 'insert'])->name('asset');
 Route::get('/admin/report/', [AdminController::class, 'report'])->name('report');
+Route::post('/admin/view_pdf', [AdminController::class, 'viewPDF']);
 Route::get('/admin/pdf', [AdminController::class, 'createPDF']);
 Route::get('/admin/profile/', [AdminController::class, 'profile']);
 Route::post('/admin', [AdminController::class, 'store']);
